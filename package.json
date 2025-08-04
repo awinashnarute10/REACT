@@ -1,0 +1,30 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "react learnings",
+  "keywords": [],
+  "homepage": "https://github.com/awinashnarute10/REACT#readme",
+  "bugs": {
+    "url": "https://github.com/awinashnarute10/REACT/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awinashnarute10/REACT.git"
+  },
+  "license": "ISC",
+  "author": "Awinash Narute",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "browserslist":[
+    "last 2 versions"
+  ]
+}
