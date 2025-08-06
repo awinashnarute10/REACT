@@ -1,0 +1,54 @@
+body{
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(87, 89, 92);
+    height: 10vh;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.logo{
+   margin-top: 5px;
+    
+    height: 100%;
+
+}
+.logo img{
+    height: 8vh;
+    width: 8vh;
+    border-radius: 50px;
+    margin-left: 3px;
+    padding: 3px;
+}
+
+.search_bar{
+border: none;
+background-color: blue;
+}
+
+.search_bar input{
+   border-radius: 15px;
+   border: 0px;
+   border-color: transparent;
+   outline: none;
+   padding-left: 5px;
+   height: 5vh;
+   width: 35vh;
+}
+
+.user img{
+    height: 5vh;
+    width: 8vh;
+    border-radius: 50px;
+    margin-left: 3px;
+    padding: 3px;
+}
+
