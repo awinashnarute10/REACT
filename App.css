@@ -1,0 +1,37 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+.logo{
+   width: 200px;
+    background-color: aquamarine;
+   
+}
+
+.logo img{
+    width: 100%;
+    display: block;
+    
+}
+
+.nav-items{
+    display: flex;
+    align-items: center;
+}
+
+.nav-items ul{
+    display: flex;
+    list-style: none;
+    padding: 0px 20px;
+    align-items: center;
+    font-size: 24px;
+    
+}
+
+.nav-items ul li{
+    padding: 10px;
+    margin: 10px;
+}
