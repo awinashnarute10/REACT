@@ -46,13 +46,14 @@ const styleCard = {
 }
 
 //rest card for body
-const RestaurantCard = () =>{
+const RestaurantCard = (props) =>{ //or we can destructure it like = ({resName, cuisine}) this will convert them in const and we can directly use these name in the {} instead of {prop.resName}
+    console.log(props);
+    const{resName, cuisine} = props;  // destructuring 
   return (
-    // or style = {{backgroundcolor:"gray"}} style expects object in jsx
     <div className="res-card" style={styleCard}> 
     <img className="res-logo" src="https://b.zmtcdn.com/data/pictures/chains/1/50691/ecfdc75d21bd7cd9d880f05c8382bc65.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A"></img>
-      <h3>Rahamatuhlha</h3>
-      <h4>Biryani, North Indian, Asian</h4>
+      <h3>{resName}</h3>
+      <h4>{cuisine}</h4>
       <h4>3.2 stars</h4>
       <h4>38 minutes</h4>
     </div>
@@ -67,16 +68,14 @@ const Body = () => {
                Search
             </div>
             <div className="res-container">
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
+                <RestaurantCard 
+                 resName="Rahmatulha"
+                 cuisine = "Biryani, North Indian, Asian"
+                />
+                <RestaurantCard
+                resName="KFC"
+                cuisine = "Fast Food, Burger"
+                />  
             </div>
           </div>
     );
