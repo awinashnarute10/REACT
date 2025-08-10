@@ -50,10 +50,11 @@ const RestaurantCard = (props) => { // in props its like {resData: resObj}
    const {resData} = props;  // here it means resData = resData inside of props therefore indireclty resData = resObj
     return (
         <div className="res-card" style={styleCard}>
-            <img className="res-logo" src="https://b.zmtcdn.com/data/pictures/chains/1/50691/ecfdc75d21bd7cd9d880f05c8382bc65.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A"></img>
+            <img className="res-logo" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+resData.info.cloudinaryImageId}></img> {/**Dynamic img*/}
             <h3>{resData.info.name}</h3>
             <h4>{resData.info.cuisines.join(", ")}</h4> {/* here .join joins all the strings in array cuisines with , between */}
             <h4>{resData.info.avgRating}</h4>
+            <h4>{resData.info.costForTwo}</h4>
             <h4>{resData.info.sla.slaString}</h4>
         </div>
     );
