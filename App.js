@@ -46,16 +46,17 @@ const styleCard = {
 }
 
 //rest card for body
-const RestaurantCard = (props) => { // in props its like {resData: resList[0]} 
-    const { resData } = props;  // here it means resData = resData inside of props therefore indireclty resData = resList[0]
+const RestaurantCard = (props) => { 
+    const { resData } = props;  
+    const{name, cuisines, avgRating, costForTwo, sla:{slaString}, cloudinaryImageId} = resData?.info; // ? means optional chaining so it doesnt throw erro if value of object is mising or undefined
     return (
         <div className="res-card" style={styleCard}>
             <img className="res-logo" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + resData.info.cloudinaryImageId}></img> {/**Dynamic img*/}
-            <h3>{resData.info.name}</h3>
-            <h4>{resData.info.cuisines.join(", ")}</h4> {/* here .join joins all the strings in array cuisines with , between */}
-            <h4>{resData.info.avgRating}</h4>
-            <h4>{resData.info.costForTwo}</h4>
-            <h4>{resData.info.sla.slaString}</h4>
+            <h3>{name}</h3>
+            <h4>{cuisines.join(", ")}</h4> 
+            <h4>{avgRating} stars</h4>
+            <h4>{costForTwo}</h4>
+            <h4>{slaString}</h4>
         </div>
     );
 };
@@ -1724,18 +1725,9 @@ const Body = () => {
                 Search
             </div>
             <div className="res-container">
-                <RestaurantCard
-                    resData={resList[0]}
-                />
-                <RestaurantCard
-                    resData={resList[1]}
-                />
-                <RestaurantCard
-                    resData={resList[2]}
-                />
-                <RestaurantCard
-                    resData={resList[3]}
-                />
+               { resList.map((restaurant)=>(
+                    <RestaurantCard key={restaurant.info.id} resData = {restaurant}/>  /**key id given to each restaurant card inside the array, good for optimizarion and performance as all the restaurant card wont be re-rendered when a new object is added */
+                ))}
             </div>
         </div>
     );
