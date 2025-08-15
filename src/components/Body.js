@@ -1,24 +1,24 @@
 import RestaurantCard from "./RestaurantCard"; // default import 
 import resList from "../utils/mockData";
+import { use, useState } from "react";
 
 //Body
 const Body = () => {
+    // Destructring the useState into statevariable and statesetter 
+    const[resListState, setresListState] = useState(resList);
     return (
         <div className="body">
             <div className="filter">
                 <button className="filter-btn" onClick={() => {
                     console.log("Button CLicked");
-                    // filter logic so that when this btn is clicked is only shows restaurant with rating>4.5
-                    resList = resList.filter( // 2 problems here resList is not defined here (because resList is const in mockData.js) but even if it was defined in this file there wouldnt be any change in ui because after this only the value of relist will change but the DOM wont re render so ui wont change 
-                        (restaurant)=>restaurant.info.avgRating>4.6
-                    );
-                    console.log(resList);
-                    render();
+                    // filtering the resListState and changing the state variable using statesetter therefore this compnent can be re rendered 
+                    setresListState(resListState.filter((restaurant)=>restaurant.info.avgRating>4.6))
+                    
                 }}>Top Rated Restaurants</button>
 
             </div>
             <div className="res-container">
-               { resList.map((restaurant)=>(
+               { resListState.map((restaurant)=>(
                     <RestaurantCard key={restaurant.info.id} resData = {restaurant}/>  
                 ))}
             </div>
