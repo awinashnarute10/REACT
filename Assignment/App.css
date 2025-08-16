@@ -1,54 +1,35 @@
-body{
-    background-color: #333;
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
 }
 
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: rgb(87, 89, 92);
-    height: 10vh;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-.logo{
-   margin-top: 5px;
-    
-    height: 100%;
-
-}
-.logo img{
-    height: 8vh;
-    width: 8vh;
-    border-radius: 50px;
-    margin-left: 3px;
-    padding: 3px;
+button {
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.search_bar{
-border: none;
-background-color: blue;
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-.search_bar input{
-   border-radius: 15px;
-   border: 0px;
-   border-color: transparent;
-   outline: none;
-   padding-left: 5px;
-   height: 5vh;
-   width: 35vh;
+button:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-.user img{
-    height: 5vh;
-    width: 8vh;
-    border-radius: 50px;
-    margin-left: 3px;
-    padding: 3px;
-}
 
