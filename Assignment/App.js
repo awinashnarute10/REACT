@@ -28,3 +28,6 @@ export default function App() {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App/>);
+
+
+// learnt about closure and stale state and why we need to pass refernce in setter instead of state itself when in closure
