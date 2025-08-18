@@ -20,14 +20,14 @@ const Body = () => {
         setresListState(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
-    // first render itll show Loading 
-    if (resListState.length === 0) {
-        return (
-            <Shimmer/>   // shimmer ui till data is not fetched
-        )
-    }
+    // Conditional Rendering:- Rendering according to condition
+    // if (resListState.length === 0) {
+    //     return (
+    //         <Shimmer/> 
+    //     )
+    // }
 
-    return (
+    return resListState.length===0 ? <Shimmer/> : (    // ternary operator 
         <div className="body">
             <div className="filter">
                 <button className="filter-btn" onClick={() => {
