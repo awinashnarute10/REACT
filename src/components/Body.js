@@ -7,6 +7,12 @@ import Shimmer from "./Shimmer";
 const Body = () => {
     const [resListState, setresListState] = useState([]);
 
+    // state variable for text inside search bar 
+    const [searchText, setSearchText] = useState("");
+
+    //copy of the resListState so that the original array doesnt change when filtered and set so that we can search again and again
+     const[filteredResList, setFilteredResList] = useState([]);
+
     useEffect(() => {
         fetchData();
     }, [])
@@ -18,27 +24,32 @@ const Body = () => {
         const json = await data.json();
 
         setresListState(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredResList(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants); // giving the same list of restaurants as resListState
     }
 
-    // Conditional Rendering:- Rendering according to condition
-    // if (resListState.length === 0) {
-    //     return (
-    //         <Shimmer/> 
-    //     )
-    // }
-
-    return resListState.length===0 ? <Shimmer/> : (    // ternary operator 
+    return resListState.length === 0 ? <Shimmer /> : (    // ternary operator for conditional rendering 
         <div className="body">
             <div className="filter">
+                    
+                    {/** Search Bar */}
+                   <input className="searchBar" value={searchText} onChange={(e)=>{setSearchText(e.currentTarget.value)}}></input>  {/** here taking the input value as a state variable and using setTExt inside onchange to set the text value. The value is now tied to state variable text*/}
+
+                   {/** Search btn to filter the restaurantListState according to user input */}
+                   <button className="search-btn" onClick={()=>
+                    {
+                         setFilteredResList(resListState.filter((res)=> {
+                          return  res.info.name.toLowerCase().includes(searchText.toLowerCase());     // here we are filtering on the basis if the searchText the user that inputs matches or is found inside the restaurants name and is made case insensitive
+                         }))
+                    }
+                   }>Search</button>
+
                 <button className="filter-btn" onClick={() => {
                     console.log("Button CLicked");
-                    setresListState(resListState.filter((restaurant) => restaurant.info.avgRating > 4.6))
-
+                    setFilteredResList(resListState.filter((restaurant) => restaurant.info.avgRating > 4.6)) // the filtered restaurants from resListStsate will be set to filteredResList so that the original resLIststate wont change and can be used again and again without losing the list of restaurants
                 }}>Top Rated Restaurants</button>
-
             </div>
             <div className="res-container">
-                {resListState.map((restaurant) => (
+                {filteredResList.map((restaurant) => (
                     <RestaurantCard key={restaurant.info.id} resData={restaurant} />
                 ))}
             </div>
