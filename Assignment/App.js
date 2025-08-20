@@ -1,11 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import GuessTheNumber from './GuessTheNumber'
+import DarkModeToggle from './DarkModeToggle';
 
 const App = () => {
-  return (
-   <GuessTheNumber/>
-  );
+  return <DarkModeToggle/>
 };
 
 
