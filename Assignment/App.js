@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Counter from "./Counter";
+import GuessTheNumber from './GuessTheNumber'
 
 const App = () => {
   return (
-    <div>
-      <h1>React Counter App</h1>
-      <Counter />
-    </div>
+   <GuessTheNumber/>
   );
 };
 
