@@ -13,10 +13,28 @@ const Body = () => {
     //copy of the resListState so that the original array doesnt change when filtered and set so that we can search again and again
      const[filteredResList, setFilteredResList] = useState([]);
 
+     // for fetching and showing data after first render 
     useEffect(() => {
         fetchData();
     }, [])
 
+    // live search 
+    useEffect(()=>
+    {
+        if(searchText.trim===""){
+           return setFilteredResList(resListState);  // here we cant directly use filteredrestaurant because it may have been changed or filtered so the best way to return all restaurant is to return the resListState
+        }
+
+        else{
+            setFilteredResList(resListState.filter((res)=> 
+                {
+                return res.info.name.toLowerCase().includes(searchText.toLowerCase());  // as the searText changes the this gets called and the filterrestaurant is updated and rendered everytime
+
+                }))
+        }
+    }, [searchText, resListState]);
+
+    // function to fetch data from swiggy api
     const fetchData = async () => {
 
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=16.8396589&lng=74.61125129999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
