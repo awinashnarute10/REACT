@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouteError } from "react-router-dom"; // hook to get the error 
+import { useRouteError } from "react-router-dom"; // hook to get the error as a js object 
 const Error = ()=>{
     const error = useRouteError()
     console.log(error);

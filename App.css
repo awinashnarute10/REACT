@@ -109,3 +109,17 @@
         background-position: 800px 0;
     }
 }
+
+
+a{
+    text-decoration: none;
+    
+}
+
+a:visited{
+    color: black;
+}
+
+a:hover{
+    color: orange;
+}
