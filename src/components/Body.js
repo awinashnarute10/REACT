@@ -67,7 +67,7 @@ const Body = () => {
             </div>
             <div className="res-container">
                 {filteredResList.map((restaurant) => (
-                    <Link to={"/restaurant/"+restaurant.info.id} key={restaurant.info.id}>
+                    <Link to={"/restaurant/"+restaurant.info.id} key={restaurant.info.id}>  {/** the restaurant.info.id is provided from here */}
                         <RestaurantCard resData={restaurant} />
                     </Link>
                 ))}
