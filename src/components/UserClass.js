@@ -12,10 +12,20 @@ class UserClass extends React.Component {
 
     render() {
        const {name, location, contact} = this.props;
+
+       const {count} = this.state; // destructuring state variable
         return(
             <div className="user-card">
            <h2>Name:{name}</h2>
-           <h2>Count: {this.state.count}</h2>  {/** using state variable*/}
+           <h2>Count: {count}</h2>  {/** using state variable*/}
+
+           {/** if count was not destructured then count: this.state.count++ */}
+           <button onClick={()=> {
+            this.setState({          
+                count: count+1    
+            });
+           }}
+           >Count Increase</button>
            <h3>Location:{location}</h3>
            <h4>Contact: {contact}</h4>
         </div>
