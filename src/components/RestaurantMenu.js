@@ -34,9 +34,9 @@ const RestaurantMenu = () => {
             <h1>Menu</h1>
             <h2>{name}</h2>
             <ul>
-                {itemCards.map((item) => {
+              {itemCards? (itemCards.map((item) => { // optional rendering 
                    return  <li key={item.card.info.id}>{item.card.info.name}-  Rs {item.card.info.price/100 || item.card.info.defaultPrice/100}</li>
-                })}
+                })) : <Shimmer/> } 
                 
             </ul>
         </div>
