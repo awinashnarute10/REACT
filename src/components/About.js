@@ -24,7 +24,7 @@ class About extends Component{  //  as we imported Component from react we dont 
             <h1>About Us Page </h1>
             
             <UserClass name="First class" location="Sangli" contact = "N/A"/>
-            <UserClass name="Second class" location="Vasco" contact = "N/A"/>
+            
 
           </div>
     );

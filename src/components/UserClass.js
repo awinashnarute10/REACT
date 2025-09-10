@@ -7,42 +7,83 @@ class UserClass extends React.Component {
         super(props);
 
         this.state = {   // initalizing and declaring state variables in class component 
-          count: 0
+          userInfo: {
+            name: "Dummy",
+            location: "Sangli",
+            avatar_url: "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+          }, 
+          userName: ""
         };
 
         console.log(this.props.name + "Consturctor called")
     }
 
 
-    componentDidMount(){  // this is called after render and its used for making api calls as it would be a problem if api is called while rendering 
+    async componentDidMount(){  // this is called after render and its used for making api calls as it would be a problem if api is called while rendering 
         console.log(this.props.name+ "did mount called")    // to understand class based component life cycle 
+
+        const data  = await fetch("https://api.github.com/users/awinashnarute10");
+        console.log(data);
+        const json = await data.json();
+
+        this.setState({
+            userInfo: json
+        });
+
+    }
+
+
+    //function to fetch info from github based on username given
+
+    fetchUser = async () => {
+         if(!this.state.userName) return;
+
+         const data = await fetch(`https://api.github.com/users/${this.state.userName}`);
+         const json = await data.json();
+
+         if(json.message === "Not Found"){
+            alert("user not found!");
+            return;
+         }
+
+         this.setState({
+            userInfo: json
+         })
     }
 
     render() {
          
         console.log(this.props.name+ "render called")
-
-       const {name, location, contact} = this.props;
-
-       const {count} = this.state; // destructuring state variable
+        
+        const {name, location, avatar_url} = this.state.userInfo;
+        const {contact} = this.props;
+       
 
         return(
+            <> {/** two sibling elements should be inside a wrapper*/}
+            <div className="user-card-input">
+                 <input 
+                 type="text"
+                 placeholder="git username"
+                 value={this.state.userName}
+                 onChange={(e) => (
+                    this.setState({
+                        userName: e.target.value
+                    })
+                 )}
+                 ></input>
+                 <button onClick={this.fetchUser}>Search</button>
+            </div>
+            
             <div className="user-card">
+
+                <img src={avatar_url}></img>
            <h2>Name:{name}</h2>
-           <h2>Count: {count}</h2>  {/** using state variable*/}
-
-           {/** if count was not destructured then count: this.state.count++ */}
-           <button onClick={()=> {
-            this.setState({          
-                count: count+1    
-            });
-           }}
-           >Count Increase</button>
-
            <h3>Location:{location}</h3>
            <h4>Contact: {contact}</h4>
 
         </div>
+        </>
         );
     };
 }
