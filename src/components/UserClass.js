@@ -14,7 +14,7 @@ class UserClass extends React.Component {
     }
 
 
-    componentDidMount(){
+    componentDidMount(){  // this is called after render and its used for making api calls as it would be a problem if api is called while rendering 
         console.log(this.props.name+ "did mount called")    // to understand class based component life cycle 
     }
 
