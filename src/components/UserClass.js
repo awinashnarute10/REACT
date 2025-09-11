@@ -30,6 +30,11 @@ class UserClass extends React.Component {
             userInfo: json
         });
 
+
+        this.timer = setInterval(()=>{   // just to show how cleanup works
+            console.log("this is not cleaned")
+        }, 1000)
+
     }
 
     // called after re rendering when setState is called 
@@ -39,6 +44,15 @@ class UserClass extends React.Component {
         if(this.state.userInfo.name !== prevState.userInfo.name){   // sideefects specific to if the name changes 
             console.log("The name has changed and here its sideeffects will be defined")
         }
+    }
+
+
+    // used when compnent is unmounted and to cleanup 
+    componentWillUnmount(){
+        console.log(this.props.name+" component is unmounted");
+
+        clearInterval(this.timer); // clears /  stops the setInterval
+
     }
 
     //function to fetch info from github based on username given
