@@ -30,10 +30,10 @@ class UserClass extends React.Component {
             userInfo: json
         });
 
-
-        this.timer = setInterval(()=>{   // just to show how cleanup works
-            console.log("this is not cleaned")
-        }, 1000)
+        // just to show how cleanup works
+        // this.timer = setInterval(()=>{   
+        //     console.log("this is not cleaned")
+        // }, 1000)
 
     }
 
@@ -51,7 +51,7 @@ class UserClass extends React.Component {
     componentWillUnmount(){
         console.log(this.props.name+" component is unmounted");
 
-        clearInterval(this.timer); // clears /  stops the setInterval
+        // clearInterval(this.timer); // clears /  stops the setInterval
 
     }
 
