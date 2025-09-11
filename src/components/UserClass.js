@@ -8,7 +8,7 @@ class UserClass extends React.Component {
 
         this.state = {   // initalizing and declaring state variables in class component 
           userInfo: {
-            name: "Dummy",
+            name: "Awinash",
             location: "Sangli",
             avatar_url: "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
           }, 
@@ -32,9 +32,16 @@ class UserClass extends React.Component {
 
     }
 
+    // called after re rendering when setState is called 
+    componentDidUpdate(prevProps, prevState){   // prevState and prevProps are the values of props and states before latest rendering or before latest setState
+        console.log(this.props.name+"Did update called")
+
+        if(this.state.userInfo.name !== prevState.userInfo.name){   // sideefects specific to if the name changes 
+            console.log("The name has changed and here its sideeffects will be defined")
+        }
+    }
 
     //function to fetch info from github based on username given
-
     fetchUser = async () => {
          if(!this.state.userName) return;
 
@@ -64,7 +71,7 @@ class UserClass extends React.Component {
             <div className="user-card-input">
                  <input 
                  type="text"
-                 placeholder="git username"
+                 placeholder="enter github username"
                  value={this.state.userName}
                  onChange={(e) => (
                     this.setState({
