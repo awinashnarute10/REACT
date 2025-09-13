@@ -2,25 +2,29 @@ import { SWIGGY_MENU_URL } from "../utils/constants";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
 
     
     const {resId} = useParams();
 
-    const [menuInfo, setMenuInfo] = useState([]);
+    //created a custom hook for this code 
+    // const [menuInfo, setMenuInfo] = useState([]);
 
-    useEffect(() =>{
-        fetchMenu();
-    }, []);
+    // useEffect(() =>{
+    //     fetchMenu();
+    // }, []);
 
-    const fetchMenu = async () => {
+    // const fetchMenu = async () => {
         
-        const data = await fetch(SWIGGY_MENU_URL+resId+"&catalog_qa=undefined&submitAction=ENTER");  // here the resID comes from body and ists defined in App as /:resId meanning its dynamic
-        const json = await data.json();
+    //     const data = await fetch(SWIGGY_MENU_URL+resId+"&catalog_qa=undefined&submitAction=ENTER");  // here the resID comes from body and ists defined in App as /:resId meanning its dynamic
+    //     const json = await data.json();
 
-        setMenuInfo(json?.data?.cards || []);
-    }
+    //     setMenuInfo(json?.data?.cards || []);
+    // }
+
+    const menuInfo = useRestaurantMenu(resId);  // custom hook
 
     if(menuInfo.length===0) return <Shimmer />
 

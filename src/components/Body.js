@@ -40,7 +40,7 @@ const Body = () => {
         const data = await fetch(SWIGGY_URL);
 
         const json = await data.json();
-
+        
         setresListState(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredResList(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants); // giving the same list of restaurants as resListState
     }
