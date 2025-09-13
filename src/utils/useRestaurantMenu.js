@@ -5,7 +5,7 @@ import { SWIGGY_MENU_URL } from "./constants";
 //  custom hook to fetch menu info
 const useRestaurantMenu = (resId) => {
  
-    const {menuInfo, setMenuInfo} = useState(null);
+    const [menuInfo, setMenuInfo] = useState(null);
 
    useEffect(() => {
      fetchMenu();

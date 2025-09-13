@@ -26,7 +26,7 @@ const RestaurantMenu = () => {
 
     const menuInfo = useRestaurantMenu(resId);  // custom hook
 
-    if(menuInfo.length===0) return <Shimmer />
+    if(!menuInfo) return <Shimmer />
 
     const{id, name} = menuInfo[2]?.card?.card?.info;
 
