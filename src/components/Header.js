@@ -22,6 +22,7 @@ const Header = () => {
                     <li><Link to ="/">Home</Link></li>  {/** using link instead of anchor tag so that only the compnent renders and the page doesnt reload therefore making the states preserved and the page fast */}
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to= "/contact">Contact Us</Link></li>
+                    <li><Link to= "/grocery">Grocery </Link></li>
                     <li>Cart</li>
                     <button className="login" onClick={() => {  // toggle function to change login to logout and vice versa 
                         btnNameReact === "Login" ? setbtnNameReact("Logout") : setbtnNameReact("Login");

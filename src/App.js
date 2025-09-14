@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,8 +7,9 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+// import Grocery from "./components/Grocery";
 
-
+const Grocery = lazy(() => import("./components/Grocery"));  // this importing also takes time
 
 // The main div 
 const Applayout = () => {
@@ -39,6 +40,11 @@ const appRouter = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact />
+            },
+            {
+                path: "/grocery",
+                element: <Suspense fallback = {<h1>Loading Grocery Items.....</h1>}><Grocery /></Suspense>      // lazy loading
+                // here suspense is used as the grocery importing above takes time and so rendering before it loads can cause problem therefore it provides a fallback
             },
             {
                 path: "/restaurant/:resId",
