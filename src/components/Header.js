@@ -12,23 +12,23 @@ const Header = () => {
 
 
     return (
-        <div className="header">
+        <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
             <div className="logo">
-                <img src={LOGO_URL}></img>
+                <img className="w-56" src={LOGO_URL}></img>
             </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Online Status:{isOnline ? " ✅": " ❌"}</li>  {/** conditional rendering for online status */}
-                    <li><Link to ="/">Home</Link></li>  {/** using link instead of anchor tag so that only the compnent renders and the page doesnt reload therefore making the states preserved and the page fast */}
-                    <li><Link to="/about">About Us</Link></li>
-                    <li><Link to= "/contact">Contact Us</Link></li>
-                    <li><Link to= "/grocery">Grocery </Link></li>
-                    <li>Cart</li>
-                    <button className="login" onClick={() => {  // toggle function to change login to logout and vice versa 
+            <div className="flex items-center">
+                <ul className="flex p-4 m-4">
+                    <li className="px-4">Online Status:{isOnline ? " ✅": " ❌"}</li>  {/** conditional rendering for online status */}
+                    <li className="px-4"><Link to ="/">Home</Link></li>  {/** using link instead of anchor tag so that only the compnent renders and the page doesnt reload therefore making the states preserved and the page fast */}
+                    <li className="px-4"><Link to="/about">About Us</Link></li>
+                    <li className="px-4"><Link to= "/contact">Contact Us</Link></li>
+                    <li className="px-4"><Link to= "/grocery">Grocery </Link></li>
+                    <li className="px-4">Cart</li>
+                    <li className="px-4"><button className="login" onClick={() => {  // toggle function to change login to logout and vice versa 
                         btnNameReact === "Login" ? setbtnNameReact("Logout") : setbtnNameReact("Login");
                     }}>
                         {btnNameReact}
-                    </button>
+                    </button></li>
                 </ul>
             </div>
         </div>

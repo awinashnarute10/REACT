@@ -23,7 +23,9 @@ const Body = () => {
 
     // live search 
     useEffect(() => {
-        if (searchText.trim === "") {
+        if (!Array.isArray(resListState)) return;
+
+        if (searchText.trim() === "") {
             return setFilteredResList(resListState);  // here we cant directly use filteredrestaurant because it may have been changed or filtered so the best way to return all restaurant is to return the resListState
         }
 
@@ -57,27 +59,31 @@ const Body = () => {
         );
     };
 
-    return resListState.length === 0 ? <Shimmer /> : (    // ternary operator for conditional rendering 
+    return !Array.isArray(resListState) || resListState.length === 0? <Shimmer /> : (    // ternary operator for conditional rendering 
         <div className="body">
-            <div className="filter">
+            <div className="filter m-4 p-4">
 
                 {/** Search Bar */}
-                <input className="searchBar" value={searchText} onChange={(e) => { setSearchText(e.currentTarget.value) }}></input>  {/** here taking the input value as a state variable and using setTExt inside onchange to set the text value. The value is now tied to state variable text*/}
+                <input className="searchBar border border-solid border-black shadow-lg shadow-gray-400"   
+                value={searchText} 
+                onChange={(e) => { setSearchText(e.currentTarget.value) }}>
+                    </input>  {/** here taking the input value as a state variable and using setTExt inside onchange to set the text value. The value is now tied to state variable text*/}
 
                 {/** Search btn to filter the restaurantListState according to user input */}
-                <button className="search-btn" onClick={() => {
+                <button className="search-btn px-3 py-1 bg-sky-50 hover:bg-sky-100 rounded-lg cursor-pointer" onClick={() => {
                     setFilteredResList(resListState.filter((res) => {
                         return res.info.name.toLowerCase().includes(searchText.toLowerCase());     // here we are filtering on the basis if the searchText the user that inputs matches or is found inside the restaurants name and is made case insensitive
                     }))
                 }
                 }>Search</button>
 
-                <button className="filter-btn" onClick={() => {
+                <button className="filter-btn px-4 py-1.5 bg-sky-50 m-2 hover:bg-sky-100 rounded-lg cursor-pointer" onClick={() => {
                     console.log("Button CLicked");
                     setFilteredResList(resListState.filter((restaurant) => restaurant.info.avgRating > 4.6)) // the filtered restaurants from resListStsate will be set to filteredResList so that the original resLIststate wont change and can be used again and again without losing the list of restaurants
                 }}>Top Rated Restaurants</button>
             </div>
-            <div className="res-container">
+
+            <div className="res-container flex flex-wrap items-stretch">
                 {filteredResList.map((restaurant) => (
                     <Link to={"/restaurant/"+restaurant.info.id} key={restaurant.info.id}>  {/** the restaurant.info.id is provided from here */}
                         <RestaurantCard resData={restaurant} />
