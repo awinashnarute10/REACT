@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard ,{withOpenLabel}from "./RestaurantCard";
 import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -15,6 +15,9 @@ const Body = () => {
 
     //copy of the resListState so that the original array doesnt change when filtered and set so that we can search again and again
     const [filteredResList, setFilteredResList] = useState([]);
+
+    //here we will use the HOC to make this component
+    const RestaurantCardOpen = withOpenLabel(RestaurantCard);
 
     // for fetching and showing data after first render 
     useEffect(() => {
@@ -77,16 +80,24 @@ const Body = () => {
                 }
                 }>Search</button>
 
+                {/** Top rated restaurant button */}
                 <button className="filter-btn px-4 py-1.5 bg-sky-50 m-2 hover:bg-sky-100 rounded-lg cursor-pointer" onClick={() => {
                     console.log("Button CLicked");
                     setFilteredResList(resListState.filter((restaurant) => restaurant.info.avgRating > 4.6)) // the filtered restaurants from resListStsate will be set to filteredResList so that the original resLIststate wont change and can be used again and again without losing the list of restaurants
                 }}>Top Rated Restaurants</button>
             </div>
 
+                {/** the main area where cards are rendered */}
             <div className="res-container flex flex-wrap items-stretch">
                 {filteredResList.map((restaurant) => (
                     <Link to={"/restaurant/"+restaurant.info.id} key={restaurant.info.id}>  {/** the restaurant.info.id is provided from here */}
-                        <RestaurantCard resData={restaurant} />
+
+                        {/**  this checks from api if restaurant is open(boolean) then enhanced component is rednered or else normal one*/}
+                         {restaurant.info.isOpen ? 
+                         <RestaurantCardOpen resData={restaurant}/> : 
+                         <RestaurantCard resData={restaurant} />
+                         }
+                        
                     </Link>
                 ))}
             </div>

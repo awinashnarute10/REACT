@@ -19,4 +19,16 @@ const RestaurantCard = (props) => {
     );
 };
 
+ export const withOpenLabel = (RestaurantCard) => {
+    return (props) => {     //  first the props will come in this component
+        return(
+          <div className="relative hover:scale-95 transition-transform duration-300">
+        <div className="absolute  bg-black text-white px-2 py-1 rounded text-sm z-10">  {/** here the open label always stays on top of the card becasue of z-10 */}
+         <label> Open</label>
+        </div>
+        <RestaurantCard {...props} />  {/** the props are passes to the main componet for rendering that is being passed to the component of HOC */}
+      </div>
+        );
+    }
+}
 export default RestaurantCard; // default export
