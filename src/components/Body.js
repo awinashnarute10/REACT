@@ -96,8 +96,7 @@ const Body = () => {
                          {restaurant.info.isOpen ? 
                          <RestaurantCardOpen resData={restaurant}/> : 
                          <RestaurantCard resData={restaurant} />
-                         }
-                        
+                         };
                     </Link>
                 ))}
             </div>
