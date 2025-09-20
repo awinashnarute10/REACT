@@ -27,6 +27,8 @@ const RestaurantMenu = () => {
 
     const menuInfo = useRestaurantMenu(resId);  // custom hook
 
+    const [showIndex, setShowIndex] = useState(null);
+
     if (!menuInfo) return <Shimmer />
 
     const { id, name, cuisines, costForTwoMessage } = menuInfo[2]?.card?.card?.info;
@@ -51,9 +53,12 @@ const RestaurantMenu = () => {
             </p>
 
             {/**Accordion Category */}
-            {categories.map((category) => (
-                 <RestaurantCategory key={category?.card?.card?.title} data = {category?.card?.card} />
-            ))}
+            {categories.map((category, index) => ( 
+                 <RestaurantCategory key={category?.card?.card?.title}
+                  data = {category?.card?.card} 
+                 showItems = {index===showIndex} 
+                 setShowIndex = {() => setShowIndex(showIndex===index ? null : index)}/> 
+            ))} {/** lifting the state and controlling the child component */}
         </div>
     )
 }
