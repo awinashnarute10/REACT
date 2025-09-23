@@ -1,10 +1,11 @@
 import RestaurantCard ,{withOpenLabel}from "./RestaurantCard";
 import resList from "../utils/mockData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { SWIGGY_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 //Body
 const Body = () => {
@@ -47,8 +48,8 @@ const Body = () => {
 
         const json = await data.json();
         
-        setresListState(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFilteredResList(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants); // giving the same list of restaurants as resListState
+        setresListState(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredResList(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants); // giving the same list of restaurants as resListState
     }
 
     // check for online status and render if offline
@@ -61,6 +62,9 @@ const Body = () => {
             </h1>
         );
     };
+
+    // from context we will get these 
+    const {setUserName, loggedInUser} = useContext(UserContext);
 
     return !Array.isArray(resListState) || resListState.length === 0? <Shimmer /> : (    // ternary operator for conditional rendering 
         <div className="body">
@@ -85,6 +89,11 @@ const Body = () => {
                     console.log("Button CLicked");
                     setFilteredResList(resListState.filter((restaurant) => restaurant.info.avgRating > 4.6)) // the filtered restaurants from resListStsate will be set to filteredResList so that the original resLIststate wont change and can be used again and again without losing the list of restaurants
                 }}>Top Rated Restaurants</button>
+                 
+                 {/** input bar to change the username */}
+                <label>User Name: </label>
+                <input className="border border-solid border-black shadow-sm shadow-gray-400" value={loggedInUser} onChange={(e) => {setUserName(e.target.value)}}></input>
+                
             </div>
 
                 {/** the main area where cards are rendered */}
