@@ -11,6 +11,7 @@ import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 const Grocery = lazy(() => import("./components/Grocery"));  // this importing also takes time
 
@@ -39,7 +40,7 @@ const Applayout = () => {
                     </UserContext.Provider>
 
                     <Outlet />  {/** Here all the children routes will be rendered  */}
-                    
+
                 </div>
             </UserContext.Provider>
         </Provider>
@@ -70,6 +71,10 @@ const appRouter = createBrowserRouter([
                 path: "/grocery",
                 element: <Suspense fallback={<h1>Loading Grocery Items.....</h1>}><Grocery /></Suspense>      // lazy loading
                 // here suspense is used as the grocery importing above takes time and so rendering before it loads can cause problem therefore it provides a fallback
+            },
+            {
+              path: "/cart",
+              element: <Cart/>
             },
             {
                 path: "/restaurant/:resId",
