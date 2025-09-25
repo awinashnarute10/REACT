@@ -9,6 +9,8 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const Grocery = lazy(() => import("./components/Grocery"));  // this importing also takes time
 
@@ -27,17 +29,20 @@ const Applayout = () => {
     }, [])
 
     return (
-        
-        <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>  {/** whatever is wrapped inside this provider will have get the value of the context when used  */}
-            <div className="app">
+        <Provider store={appStore}>  {/** here we have provided the central store to all the components so that we dont have to import it everytime */}
 
-                <UserContext.Provider value={{ loggedInUser: "Awinash" }}>  {/** nested context provider and the innermost context will have the highest priority for whatever it is wrapping */}
-                    <Header />
-                </UserContext.Provider>
+            <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>  {/** whatever is wrapped inside this provider will have get the value of the context when used  */}
+                <div className="app">
 
-                <Outlet />  {/** Here all the children routes will be rendered  */}
-            </div>
-        </UserContext.Provider>
+                    <UserContext.Provider value={{ loggedInUser: "Awinash" }}>  {/** nested context provider and the innermost context will have the highest priority for whatever it is wrapping */}
+                        <Header />
+                    </UserContext.Provider>
+
+                    <Outlet />  {/** Here all the children routes will be rendered  */}
+                    
+                </div>
+            </UserContext.Provider>
+        </Provider>
 
     );
 };

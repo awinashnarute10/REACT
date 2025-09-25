@@ -3,6 +3,7 @@ import { use, useContext, useState } from "react";
 import { Link } from "react-router-dom"; // Link from react router 
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 //Header
 const Header = () => {
@@ -13,6 +14,9 @@ const Header = () => {
 
     const {loggedInUser} = useContext(UserContext);   // using/ consuming context in functional components
     // console.log(data);
+
+    // subscribing to the store using a selector
+    const cartItems = useSelector((store) => store.cart.items);  //  here the selector variable stores the items in it
 
     return (
         <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
@@ -26,7 +30,7 @@ const Header = () => {
                     <li className="px-4"><Link to="/about">About Us</Link></li>
                     <li className="px-4"><Link to= "/contact">Contact Us</Link></li>
                     <li className="px-4"><Link to= "/grocery">Grocery </Link></li>
-                    <li className="px-4">Cart</li>
+                    <li className="px-4">Cart ({cartItems.length})</li>
                     <li className="px-4"><button className="login cursor-pointer" onClick={() => {  // toggle function to change login to logout and vice versa 
                         btnNameReact === "Login" ? setbtnNameReact("Logout") : setbtnNameReact("Login");
                     }}>
